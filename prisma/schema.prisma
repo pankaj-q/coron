@@ -1,0 +1,50 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+  plans        Plan[]
+}
+
+model Plan {
+  id           String   @id @default(cuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title        String
+  taskInput    String
+  deadline     String?
+  summary      String?
+  focus        String?
+  totalMinutes Int?
+  status       String   @default("active")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  steps        Step[]
+
+  @@index([userId])
+}
+
+model Step {
+  id       String  @id @default(cuid())
+  planId   String
+  plan     Plan    @relation(fields: [planId], references: [id], onDelete: Cascade)
+  stepNo   Int
+  title    String
+  how      String
+  when     String
+  duration Int
+  priority String
+  done     Boolean @default(false)
+
+  @@index([planId])
+}
