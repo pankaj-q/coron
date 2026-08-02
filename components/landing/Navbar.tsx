@@ -55,7 +55,7 @@ export function Navbar() {
           </Link>
           <Link
             href="/signup"
-            className="group relative overflow-hidden rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-violet-600/40 transition-transform hover:scale-[1.04] active:scale-95"
+            className="group relative overflow-hidden rounded-xl bg-gradient-to-r from-amber-400 to-orange-600 px-5 py-2 text-sm font-semibold text-slate-950 shadow-lg shadow-orange-500/40 transition-transform hover:scale-[1.04] active:scale-95"
           >
             <span className="relative z-10">Get started</span>
             <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
@@ -99,7 +99,7 @@ export function Navbar() {
               <Link
                 href="/signup"
                 onClick={() => setOpen(false)}
-                className="flex-1 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 px-4 py-2.5 text-center text-sm font-semibold text-white"
+                className="flex-1 rounded-xl bg-gradient-to-r from-amber-400 to-orange-600 px-4 py-2.5 text-center text-sm font-semibold text-slate-950"
               >
                 Sign up
               </Link>

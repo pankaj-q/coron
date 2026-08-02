@@ -151,7 +151,7 @@ export function AuthForm({ mode }: { mode: Mode }) {
             </form>
 
             <p className="mt-6 text-center text-sm text-slate-400">
-              {isLogin ? "New to PlanPilot?" : "Already have an account?"}{" "}
+              {isLogin ? "New to Coron?" : "Already have an account?"}{" "}
               <Link
                 href={isLogin ? "/signup" : "/login"}
                 className="font-semibold text-cyan-300 transition-colors hover:text-cyan-200"

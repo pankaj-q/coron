@@ -98,7 +98,7 @@ export function Showcase() {
               One glance. You instantly know <span className="text-gradient">what&apos;s next</span>.
             </h2>
             <p className="mt-5 max-w-lg leading-relaxed text-slate-400">
-              No walls of text. PlanPilot renders your plan as a living timeline —
+              No walls of text. Coron renders your plan as a living timeline —
               priorities glow, timings are pinned, and progress flows. You feel the
               order before you even read a word.
             </p>

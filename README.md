@@ -1,4 +1,4 @@
-# PlanPilot 🚀
+# Coron 🚀
 
 An AI-powered smart planner. Type a goal → Gemini builds a **prioritized, perfectly-timed, step-by-step plan** → see it as a living 3D-styled animated timeline: what to do, when to do it, how to do it, and in what order — at a glance.
 

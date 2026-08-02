@@ -29,10 +29,10 @@ export function CTA() {
             <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
               <Link
                 href="/signup"
-                className="group relative overflow-hidden rounded-2xl bg-white px-8 py-4 text-base font-bold text-indigo-700 shadow-xl shadow-black/20 transition-all hover:scale-[1.04] active:scale-95"
+                className="group relative overflow-hidden rounded-2xl bg-gradient-to-r from-amber-400 to-orange-500 px-8 py-4 text-base font-bold text-slate-950 shadow-xl shadow-black/20 transition-all hover:scale-[1.04] active:scale-95"
               >
                 <span className="relative z-10">Start free — no card needed</span>
-                <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-indigo-100/70 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+                <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/50 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
               </Link>
               <Link
                 href="/login"

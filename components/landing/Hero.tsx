@@ -45,7 +45,7 @@ export function Hero() {
             variants={item}
             className="mt-6 max-w-xl text-lg leading-relaxed text-slate-300"
           >
-            Tell PlanPilot what you want to achieve — today, this week, or this year.
+            Tell Coron what you want to achieve — today, this week, or this year.
             It instantly builds a <span className="font-semibold text-white">prioritized, perfectly-timed plan</span>:
             what to do, when to do it, and how — in a way you can feel at a glance.
           </motion.p>
@@ -53,7 +53,7 @@ export function Hero() {
           <motion.div variants={item} className="mt-9 flex flex-wrap items-center gap-4">
             <Link
               href="/signup"
-              className="group relative overflow-hidden rounded-2xl bg-gradient-to-r from-violet-600 via-fuchsia-500 to-cyan-500 bg-[length:200%_auto] px-8 py-4 text-base font-bold text-white shadow-xl shadow-violet-600/40 transition-all hover:bg-right hover:shadow-fuchsia-600/40 active:scale-95"
+              className="group relative overflow-hidden rounded-2xl bg-gradient-to-r from-amber-400 via-orange-500 to-rose-500 bg-[length:200%_auto] px-8 py-4 text-base font-bold text-slate-950 shadow-xl shadow-orange-500/40 transition-all hover:bg-right hover:shadow-rose-500/50 active:scale-95"
             >
               <span className="relative z-10">Create my first plan — it&apos;s free</span>
               <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
@@ -90,7 +90,13 @@ export function Hero() {
             </div>
             <div className="hidden h-5 w-px bg-white/10 sm:block" />
             <div className="flex items-center gap-2">
-              <span className="text-amber-300">★★★★★</span>
+              <span className="flex gap-0.5 text-amber-400">
+                {[0, 1, 2, 3, 4].map((i) => (
+                  <svg key={i} viewBox="0 0 24 24" fill="currentColor" className="h-3.5 w-3.5">
+                    <path d="M11.48 3.5a.56.56 0 0 1 1.04 0l2.13 5.11a.56.56 0 0 0 .47.35l5.52.44a.56.56 0 0 1 .32.99l-4.2 3.6a.56.56 0 0 0-.18.56l1.28 5.38a.56.56 0 0 1-.84.61l-4.72-2.88a.56.56 0 0 0-.59 0l-4.72 2.88a.56.56 0 0 1-.84-.61l1.28-5.38a.56.56 0 0 0-.18-.56l-4.2-3.6a.56.56 0 0 1 .32-.99l5.52-.44a.56.56 0 0 0 .47-.35l2.13-5.11Z" />
+                  </svg>
+                ))}
+              </span>
               <span>4.9 rated by planners</span>
             </div>
           </motion.div>

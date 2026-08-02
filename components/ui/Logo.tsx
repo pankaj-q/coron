@@ -24,7 +24,7 @@ export function Logo() {
     <div className="flex items-center gap-2.5">
       <LogoMark />
       <span className="font-display text-xl font-bold tracking-tight text-white">
-        Plan<span className="text-gradient">Pilot</span>
+        Cor<span className="text-gradient">on</span>
       </span>
     </div>
   );
