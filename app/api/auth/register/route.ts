@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
-import { encrypt, SESSION_COOKIE } from "@/lib/session";
+import { issueVerificationCode } from "@/lib/verify";
 import { rateLimit } from "@/lib/rate-limit";
 
 const schema = z.object({
@@ -47,18 +47,14 @@ export async function POST(req: NextRequest) {
   }
 
   const passwordHash = await bcrypt.hash(password, 10);
-  const user = await prisma.user.create({
+  await prisma.user.create({
     data: { name, email: normalizedEmail, passwordHash },
   });
 
-  const token = await encrypt({ userId: user.id, name: user.name, email: user.email });
-  const res = NextResponse.json({ success: true });
-  res.cookies.set(SESSION_COOKIE, token, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
-    path: "/",
-    maxAge: 60 * 60 * 24 * 30,
+  const code = await issueVerificationCode(normalizedEmail);
+  return NextResponse.json({
+    success: true,
+    requiresVerification: true,
+    devCode: process.env.NODE_ENV === "production" ? undefined : code,
   });
-  return res;
 }

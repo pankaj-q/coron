@@ -33,13 +33,22 @@ export function AuthForm({ mode }: { mode: Mode }) {
       const data = await res.json().catch(() => ({}));
 
       if (!res.ok) {
+        if (res.status === 403 && data.needsVerification) {
+          router.push(`/verify-email?email=${encodeURIComponent(data.email ?? email)}`);
+          return;
+        }
         setError(data.error ?? "Something went wrong. Please try again.");
         return;
       }
 
-      const next = searchParams.get("next") || "/dashboard";
-      router.push(next);
-      router.refresh();
+      if (isLogin) {
+        const next = searchParams.get("next") || "/dashboard";
+        router.push(next);
+        router.refresh();
+      } else {
+        const code = data.devCode ? `&code=${encodeURIComponent(data.devCode)}` : "";
+        router.push(`/verify-email?email=${encodeURIComponent(email)}${code}`);
+      }
     } catch {
       setError("Network error. Please check your connection and try again.");
     } finally {

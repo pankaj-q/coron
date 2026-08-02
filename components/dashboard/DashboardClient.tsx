@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { Logo } from "@/components/ui/Logo";
@@ -27,6 +27,11 @@ function todayLabel() {
 export function DashboardClient({ userName, plans }: { userName: string; plans: PlanDto[] }) {
   const router = useRouter();
   const [loggingOut, setLoggingOut] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const totalSteps = plans.reduce((n, p) => n + p.steps.length, 0);
   const doneSteps = plans.reduce((n, p) => n + p.steps.filter((s) => s.done).length, 0);
@@ -97,9 +102,9 @@ export function DashboardClient({ userName, plans }: { userName: string; plans: 
           className="mb-8 flex flex-wrap items-end justify-between gap-4"
         >
           <div>
-            <p className="mb-1.5 text-sm font-medium text-violet-300">{todayLabel()}</p>
+            <p className="mb-1.5 text-sm font-medium text-violet-300">{mounted ? todayLabel() : "Today"}</p>
             <h1 className="font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
-              {timeOfDay()}, {userName.split(" ")[0]}.
+              {mounted ? `${timeOfDay()}, ${userName.split(" ")[0]}.` : `Welcome, ${userName.split(" ")[0]}.`}
             </h1>
             <p className="mt-2 text-slate-400">
               Describe a goal — big or small — and watch your plan unfold.

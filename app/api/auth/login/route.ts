@@ -38,6 +38,17 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid email or password." }, { status: 401 });
   }
 
+  if (!user.emailVerified) {
+    return NextResponse.json(
+      {
+        error: "Please verify your email before logging in.",
+        needsVerification: true,
+        email: user.email,
+      },
+      { status: 403 },
+    );
+  }
+
   const token = await encrypt({ userId: user.id, name: user.name, email: user.email });
   const res = NextResponse.json({ success: true });
   res.cookies.set(SESSION_COOKIE, token, {

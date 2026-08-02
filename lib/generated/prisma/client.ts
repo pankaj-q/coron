@@ -47,6 +47,11 @@ export { Prisma }
  */
 export type User = Prisma.UserModel
 /**
+ * Model VerificationCode
+ * 
+ */
+export type VerificationCode = Prisma.VerificationCodeModel
+/**
  * Model Plan
  * 
  */

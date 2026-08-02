@@ -7,7 +7,7 @@ export default async function proxy(req: NextRequest) {
   const session = await decrypt(token);
 
   const isProtected = path.startsWith("/dashboard");
-  const isGuestOnly = path === "/login" || path === "/signup";
+  const isGuestOnly = path === "/login" || path === "/signup" || path === "/verify-email";
 
   if (isProtected && !session) {
     const url = new URL("/login", req.nextUrl);
