@@ -19,7 +19,7 @@ const item: Variants = {
 export function Hero() {
   return (
     <section className="relative overflow-hidden pt-36 pb-20 sm:pt-44">
-      <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 sm:px-8 lg:grid-cols-2 lg:gap-8">
+      <div className="mx-auto grid max-w-[96rem] items-center gap-14 px-5 sm:px-6 lg:grid-cols-2 lg:gap-8">
         <motion.div variants={container} initial="hidden" animate="show" className="relative z-10">
           <motion.div
             variants={item}

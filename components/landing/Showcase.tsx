@@ -85,7 +85,7 @@ export function Showcase() {
 
   return (
     <section id="showcase" ref={ref} className="relative py-28">
-      <div className="mx-auto max-w-7xl px-5 sm:px-8">
+      <div className="mx-auto max-w-[96rem] px-5 sm:px-6">
         <div className="grid items-center gap-14 lg:grid-cols-2">
           <motion.div
             initial={{ opacity: 0, x: -30 }}

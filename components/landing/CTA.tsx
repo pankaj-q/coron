@@ -6,7 +6,7 @@ import Link from "next/link";
 export function CTA() {
   return (
     <section className="relative py-28">
-      <div className="mx-auto max-w-6xl px-5 sm:px-8">
+      <div className="mx-auto max-w-[96rem] px-5 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}

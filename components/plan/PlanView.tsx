@@ -58,7 +58,7 @@ export function PlanView({ plan: initial }: { plan: PlanDto }) {
   });
 
   return (
-    <div className="mx-auto max-w-4xl px-5 pb-24 pt-8 sm:px-8">
+    <div className="mx-auto max-w-4xl px-5 pb-24 pt-8 sm:px-7">
       <motion.div initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }}>
         <Link
           href="/dashboard"

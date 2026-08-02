@@ -5,8 +5,24 @@ import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { Logo } from "@/components/ui/Logo";
 import { CreatePlan } from "@/components/dashboard/CreatePlan";
+import { ProgressOverview } from "@/components/dashboard/ProgressOverview";
 import { PlanCard } from "@/components/dashboard/PlanCard";
 import type { PlanDto } from "@/lib/types";
+
+function timeOfDay() {
+  const h = new Date().getHours();
+  if (h < 12) return "Good morning";
+  if (h < 18) return "Good afternoon";
+  return "Good evening";
+}
+
+function todayLabel() {
+  return new Date().toLocaleDateString(undefined, {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+  });
+}
 
 export function DashboardClient({ userName, plans }: { userName: string; plans: PlanDto[] }) {
   const router = useRouter();
@@ -17,9 +33,27 @@ export function DashboardClient({ userName, plans }: { userName: string; plans: 
   const completedPlans = plans.filter((p) => p.steps.length > 0 && p.steps.every((s) => s.done)).length;
 
   const stats = [
-    { label: "Total plans", value: plans.length, accent: "text-violet-300" },
-    { label: "Steps completed", value: `${doneSteps}/${totalSteps}`, accent: "text-cyan-300" },
-    { label: "Plans finished", value: completedPlans, accent: "text-emerald-300" },
+    {
+      label: "Total plans",
+      value: plans.length,
+      chip: "from-violet-500 to-indigo-500 shadow-violet-500/25",
+      glow: "group-hover:shadow-violet-500/40",
+      icon: "M4 6a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6zm9 0a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-3a2 2 0 0 1-2-2V6zM4 15a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-3zm9 0a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-3a2 2 0 0 1-2-2v-3z",
+    },
+    {
+      label: "Steps completed",
+      value: `${doneSteps}/${totalSteps}`,
+      chip: "from-cyan-500 to-sky-500 shadow-cyan-500/25",
+      glow: "group-hover:shadow-cyan-500/40",
+      icon: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z",
+    },
+    {
+      label: "Plans finished",
+      value: completedPlans,
+      chip: "from-emerald-500 to-teal-500 shadow-emerald-500/25",
+      glow: "group-hover:shadow-emerald-500/40",
+      icon: "M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1v12zm0 0v6",
+    },
   ];
 
   async function handleLogout() {
@@ -31,8 +65,8 @@ export function DashboardClient({ userName, plans }: { userName: string; plans: 
 
   return (
     <div className="min-h-screen pb-24">
-      <header className="sticky top-0 z-40 border-b border-white/5 glass-strong">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3.5 sm:px-8">
+      <header className="sticky top-0 z-40 border-b border-white/5 bg-[#05060f]/80 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-[96rem] items-center justify-between px-5 py-3.5 sm:px-6">
           <Logo />
           <div className="flex items-center gap-3">
             <div className="hidden items-center gap-2.5 sm:flex">
@@ -44,7 +78,7 @@ export function DashboardClient({ userName, plans }: { userName: string; plans: 
             <button
               onClick={handleLogout}
               disabled={loggingOut}
-              className="flex items-center gap-2 rounded-xl glass px-4 py-2 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/10 disabled:opacity-60"
+              className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] px-4 py-2 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/10 disabled:opacity-60"
             >
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4">
                 <path d="M15 12H3m0 0l4-4m-4 4l4 4m9-11h4a1 1 0 011 1v12a1 1 0 01-1 1h-4" strokeLinecap="round" strokeLinejoin="round" />
@@ -55,40 +89,80 @@ export function DashboardClient({ userName, plans }: { userName: string; plans: 
         </div>
       </header>
 
-      <main className="mx-auto max-w-7xl px-5 pt-10 sm:px-8">
+      <main className="mx-auto max-w-[96rem] px-5 pt-10 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="mb-8"
+          className="mb-8 flex flex-wrap items-end justify-between gap-4"
         >
-          <h1 className="font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            Hey {userName.split(" ")[0]}, what are we <span className="text-gradient">crushing</span> today?
-          </h1>
-          <p className="mt-2 text-slate-400">Describe a goal — big or small — and watch your plan unfold.</p>
+          <div>
+            <p className="mb-1.5 text-sm font-medium text-violet-300">{todayLabel()}</p>
+            <h1 className="font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
+              {timeOfDay()}, {userName.split(" ")[0]}.
+            </h1>
+            <p className="mt-2 text-slate-400">
+              Describe a goal — big or small — and watch your plan unfold.
+            </p>
+          </div>
+          <span className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm font-medium text-slate-300">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4 text-emerald-400">
+              <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z" strokeLinejoin="round" />
+            </svg>
+            {plans.length > 0 ? `${doneSteps}/${totalSteps} steps done` : "Ready for your first plan"}
+          </span>
         </motion.div>
+
+        <div className="mb-10 grid gap-5 lg:grid-cols-3">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="lg:col-span-2"
+          >
+            <CreatePlan />
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.18 }}
+          >
+            <ProgressOverview
+              doneSteps={doneSteps}
+              totalSteps={totalSteps}
+              completedPlans={completedPlans}
+              totalPlans={plans.length}
+            />
+          </motion.div>
+        </div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="mb-10 grid grid-cols-3 gap-4"
+          transition={{ duration: 0.5, delay: 0.25 }}
+          className="mb-10 grid gap-5 sm:grid-cols-3"
         >
           {stats.map((s) => (
-            <div key={s.label} className="glass rounded-2xl px-4 py-4 text-center sm:px-6 sm:py-5">
-              <p className={`font-display text-2xl font-bold sm:text-3xl ${s.accent}`}>{s.value}</p>
-              <p className="mt-1 text-[11px] uppercase tracking-wider text-slate-500 sm:text-xs">{s.label}</p>
+            <div
+              key={s.label}
+              className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-white/20 hover:bg-white/[0.05]"
+            >
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+              <div className="flex items-start justify-between">
+                <div className={`grid h-12 w-12 place-items-center rounded-xl bg-gradient-to-br text-white shadow-lg transition-shadow duration-300 ${s.chip} ${s.glow}`}>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-5.5 w-5.5">
+                    <path d={s.icon} strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </div>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-4 w-4 text-slate-600 transition-colors group-hover:text-slate-400">
+                  <path d="M4.5 12h15m-6-6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+              <p className="mt-6 font-display text-3xl font-bold tracking-tight text-white">{s.value}</p>
+              <p className="mt-1 text-xs font-medium uppercase tracking-wider text-slate-500">{s.label}</p>
+              <div className={`mt-5 h-0.5 w-8 rounded-full bg-gradient-to-r transition-all duration-300 group-hover:w-full ${s.chip.split(" ")[0]} to-transparent`} />
             </div>
           ))}
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.15 }}
-          className="mb-12"
-        >
-          <CreatePlan />
         </motion.div>
 
         <div className="mb-6 flex items-center gap-3">
@@ -104,11 +178,14 @@ export function DashboardClient({ userName, plans }: { userName: string; plans: 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="glass grid place-items-center rounded-3xl py-20 text-center"
+            className="grid place-items-center rounded-3xl border border-white/10 bg-white/[0.03] py-20 text-center"
           >
-            <div className="relative mb-6 grid h-20 w-20 place-items-center rounded-full bg-gradient-to-br from-violet-600/30 to-cyan-500/30">
-              <span className="text-4xl">🚀</span>
-              <span className="absolute inset-0 rounded-full animate-pulse-ring ring-1 ring-violet-400/50" />
+            <div className="relative mb-6 grid h-16 w-16 place-items-center rounded-2xl bg-gradient-to-br from-violet-600/20 to-cyan-500/20 ring-1 ring-white/10">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-7 w-7 text-violet-300">
+                <path d="M12 2v4m0 12v4M4.9 4.9l2.8 2.8m8.6 8.6l2.8 2.8M2 12h4m12 0h4m-16.7 2.1l2.8-2.8m8.6-8.6l2.8-2.8" strokeLinecap="round" />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
+              <span className="absolute inset-0 animate-pulse-ring rounded-2xl ring-1 ring-violet-400/40" />
             </div>
             <h3 className="font-display text-xl font-bold text-white">No plans yet</h3>
             <p className="mt-2 max-w-sm text-sm text-slate-400">

@@ -50,7 +50,7 @@ const features = [
 export function Features() {
   return (
     <section id="features" className="relative py-28">
-      <div className="mx-auto max-w-7xl px-5 sm:px-8">
+      <div className="mx-auto max-w-[96rem] px-5 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
