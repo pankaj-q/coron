@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useSyncExternalStore } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { Logo } from "@/components/ui/Logo";
@@ -24,14 +25,22 @@ function todayLabel() {
   });
 }
 
-export function DashboardClient({ userName, plans }: { userName: string; plans: PlanDto[] }) {
+export function DashboardClient({
+  userName,
+  userImage,
+  plans,
+}: {
+  userName: string;
+  userImage?: string | null;
+  plans: PlanDto[];
+}) {
   const router = useRouter();
   const [loggingOut, setLoggingOut] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
 
   const totalSteps = plans.reduce((n, p) => n + p.steps.length, 0);
   const doneSteps = plans.reduce((n, p) => n + p.steps.filter((s) => s.done).length, 0);
@@ -74,12 +83,32 @@ export function DashboardClient({ userName, plans }: { userName: string; plans: 
         <div className="mx-auto flex max-w-[96rem] items-center justify-between px-5 py-3.5 sm:px-6">
           <Logo />
           <div className="flex items-center gap-3">
-            <div className="hidden items-center gap-2.5 sm:flex">
-              <div className="grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br from-violet-500 to-cyan-500 text-sm font-bold text-white">
-                {userName.charAt(0).toUpperCase()}
+            <Link
+              href="/dashboard/profile"
+              className="group hidden items-center gap-2.5 sm:flex"
+              title="Edit profile"
+            >
+              <div className="relative grid h-9 w-9 place-items-center overflow-hidden rounded-full bg-gradient-to-br from-violet-500 to-cyan-500 text-sm font-bold text-white ring-2 ring-white/10 transition group-hover:ring-violet-400/60">
+                {userImage ? (
+                  <img src={userImage} alt={userName} className="h-full w-full object-cover" />
+                ) : (
+                  userName.charAt(0).toUpperCase()
+                )}
+                <span className="absolute inset-0 bg-black/0 transition-colors group-hover:bg-black/25" />
               </div>
               <span className="text-sm font-medium text-slate-300">{userName}</span>
-            </div>
+            </Link>
+            <Link
+              href="/dashboard/profile"
+              className="grid h-9 w-9 place-items-center overflow-hidden rounded-full bg-gradient-to-br from-violet-500 to-cyan-500 text-sm font-bold text-white ring-2 ring-white/10 transition hover:ring-violet-400/60 sm:hidden"
+              title="Edit profile"
+            >
+              {userImage ? (
+                <img src={userImage} alt={userName} className="h-full w-full object-cover" />
+              ) : (
+                userName.charAt(0).toUpperCase()
+              )}
+            </Link>
             <button
               onClick={handleLogout}
               disabled={loggingOut}

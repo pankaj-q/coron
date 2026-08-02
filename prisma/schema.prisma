@@ -10,9 +10,10 @@ datasource db {
 model User {
   id                String             @id @default(cuid())
   name              String
-  email             String             @unique
-  passwordHash      String
-  emailVerified     DateTime?
+  email          String             @unique
+  passwordHash   String
+  image          String?
+  emailVerified  DateTime?
   createdAt         DateTime           @default(now())
   plans             Plan[]
   verificationCodes VerificationCode[]

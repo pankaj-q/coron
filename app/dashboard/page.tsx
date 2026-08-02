@@ -20,7 +20,7 @@ export default async function DashboardPage() {
   return (
     <>
       <BackgroundFX />
-      <DashboardClient userName={session.name} plans={plans.map(serializePlan)} />
+      <DashboardClient userName={session.name} userImage={session.image} plans={plans.map(serializePlan)} />
     </>
   );
 }

@@ -49,7 +49,12 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const token = await encrypt({ userId: user.id, name: user.name, email: user.email });
+  const token = await encrypt({
+    userId: user.id,
+    name: user.name,
+    email: user.email,
+    image: user.image,
+  });
   const res = NextResponse.json({ success: true });
   res.cookies.set(SESSION_COOKIE, token, {
     httpOnly: true,
