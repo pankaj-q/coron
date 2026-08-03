@@ -84,7 +84,7 @@ export function Showcase() {
   const inView = useInView(ref, { once: true, margin: "-120px" });
 
   return (
-    <section id="showcase" ref={ref} className="relative py-28">
+    <section id="showcase" ref={ref} className="relative border-t border-white/5 py-28">
       <div className="mx-auto max-w-[96rem] px-5 sm:px-6">
         <div className="grid items-center gap-14 lg:grid-cols-2">
           <motion.div
@@ -93,9 +93,9 @@ export function Showcase() {
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.7 }}
           >
-            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.3em] text-cyan-400">Showcase</p>
+            <p className="mb-3 font-mono text-xs uppercase tracking-[0.25em] text-emerald-400">{"// showcase"}</p>
             <h2 className="font-display text-4xl font-bold tracking-tight text-white sm:text-5xl">
-              One glance. You instantly know <span className="text-gradient">what&apos;s next</span>.
+              One glance. You instantly know <span className="text-stroke">what&apos;s next</span>.
             </h2>
             <p className="mt-5 max-w-lg leading-relaxed text-slate-400">
               No walls of text. Coron renders your plan as a living timeline —
