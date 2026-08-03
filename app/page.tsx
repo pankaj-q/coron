@@ -1,25 +1,20 @@
-import { BackgroundFX } from "@/components/ui/BackgroundFX";
 import { Navbar } from "@/components/landing/Navbar";
 import { Hero } from "@/components/landing/Hero";
-import { HowItWorks } from "@/components/landing/HowItWorks";
+import { ValueRow } from "@/components/landing/ValueRow";
 import { Features } from "@/components/landing/Features";
-import { Showcase } from "@/components/landing/Showcase";
-import { CTA } from "@/components/landing/CTA";
-import { CinematicFooter } from "@/components/ui/CinematicFooter";
+import { LandingFooter } from "@/components/landing/LandingFooter";
 
 export default function Home() {
   return (
-    <>
-      <BackgroundFX />
+    <div className="relative min-h-screen bg-hermes text-[#f5f5f5]">
+      <div className="pointer-events-none fixed inset-0 z-[70] border-[clamp(16px,3vw,30px)] border-hermes" />
       <Navbar />
-      <main>
+      <main className="relative uppercase">
         <Hero />
-        <HowItWorks />
+        <ValueRow />
         <Features />
-        <Showcase />
-        <CTA />
+        <LandingFooter />
       </main>
-      <CinematicFooter />
-    </>
+    </div>
   );
 }

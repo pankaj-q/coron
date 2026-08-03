@@ -25,17 +25,17 @@ const lines: Line[] = [
 function lineColor(type: Line["type"]) {
   switch (type) {
     case "cmd":
-      return "text-white";
+      return "text-hermes font-bold";
     case "dim":
-      return "text-slate-500";
+      return "text-hermes/40";
     case "ok":
-      return "text-emerald-400";
+      return "text-hermes font-bold";
     case "high":
-      return "text-rose-300";
+      return "text-hermes/85 font-bold";
     case "med":
-      return "text-amber-300";
+      return "text-hermes/75";
     case "low":
-      return "text-emerald-300";
+      return "text-hermes/60";
   }
 }
 
@@ -74,23 +74,27 @@ export function TerminalDemo() {
   const cursorBlink = lineIdx >= lines.length;
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#0a0a0c] shadow-2xl shadow-black/60">
-      <div className="flex items-center gap-2 border-b border-white/10 px-5 py-3">
-        <span className="h-3 w-3 rounded-full bg-rose-500/80" />
-        <span className="h-3 w-3 rounded-full bg-amber-500/80" />
-        <span className="h-3 w-3 rounded-full bg-emerald-500/80" />
-        <span className="ml-3 font-mono text-xs text-slate-500">coron — zsh</span>
-        <span className="ml-auto rounded border border-white/10 px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-slate-500">
+    <div className="w-full border border-[#0000f2]/15 bg-white">
+      <div className="flex items-center gap-2 border-b border-[#0000f2]/10 px-5 py-3">
+        <span className="h-3 w-3 rounded-full border border-[#0000f2]/25" />
+        <span className="h-3 w-3 rounded-full border border-[#0000f2]/25" />
+        <span className="h-3 w-3 rounded-full border border-[#0000f2]/25" />
+        <span className="ml-3 font-courier text-xs tracking-[0.1em] text-[#0000f2]/50">
+          coron — zsh
+        </span>
+        <span className="ml-auto bg-acid px-2 py-0.5 font-courier text-[10px] tracking-[0.14em] text-hermes">
           live demo
         </span>
       </div>
 
-      <div className="min-h-[16rem] space-y-1.5 p-6 font-mono text-[13px] leading-relaxed sm:text-sm">
+      <div className="min-h-[15rem] space-y-1.5 p-6 font-courier text-[13px] leading-relaxed sm:text-sm">
         {lines.slice(0, lineIdx + 1).map((line, i) =>
           i === lineIdx ? (
             <p key={i} className={lineColor(line.type)}>
               {line.text.slice(0, charIdx)}
-              {!cursorBlink && <span className="ml-0.5 inline-block h-3.5 w-2 translate-y-0.5 animate-pulse bg-white" />}
+              {!cursorBlink && (
+                <span className="ml-0.5 inline-block h-3.5 w-2 translate-y-0.5 animate-pulse bg-hermes" />
+              )}
             </p>
           ) : (
             <p key={i} className={lineColor(line.type)}>
@@ -99,9 +103,8 @@ export function TerminalDemo() {
           ),
         )}
         {cursorBlink && (
-          <p className="text-slate-500">
-            <span className="text-emerald-400">$</span>{" "}
-            <span className="ml-0.5 inline-block h-3.5 w-2 translate-y-0.5 animate-pulse bg-white" />
+          <p className="text-hermes font-bold">
+            $ <span className="ml-0.5 inline-block h-3.5 w-2 translate-y-0.5 animate-pulse bg-hermes" />
           </p>
         )}
       </div>
