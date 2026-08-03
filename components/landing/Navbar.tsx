@@ -13,42 +13,40 @@ const social = [
 
 export function Navbar() {
   return (
-    <header className="absolute inset-x-0 top-0 z-40 px-[clamp(20px,7vw,120px)] pt-[clamp(44px,6.5vw,88px)]">
-      <div className="grid grid-cols-[1fr_auto_1fr] items-center">
+    <header className="fixed inset-x-0 top-0 z-40 px-4 pt-4 sm:px-6">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between gap-4 rounded-full glass px-5 py-3 sm:px-8">
         <div className="flex items-center gap-5 sm:gap-8">
           <a
             href="#features"
-            className="link-underline text-[clamp(0.85rem,calc(1.4vw),1.15rem)] font-bold tracking-[0.03em] text-[#f5f5f5]"
+            className="link-underline font-display text-sm font-semibold tracking-wide text-[#e8ebff]/80 hover:text-white"
           >
             How it works
           </a>
           <a
             href="#goals"
-            className="link-underline hidden text-[clamp(0.85rem,calc(1.4vw),1.15rem)] font-bold tracking-[0.03em] text-[#f5f5f5] sm:inline-block"
+            className="link-underline hidden font-display text-sm font-semibold tracking-wide text-[#e8ebff]/80 hover:text-white sm:inline-block"
           >
             Your plan
           </a>
         </div>
 
-        <div className="flex flex-col items-center leading-none">
-          <span className="font-editorial text-[clamp(1.6rem,3.4vw,3rem)] font-light tracking-[0.03em] text-[#f5f5f5]">
-            Coron
-          </span>
-          <span className="mt-1 font-courier text-[0.6rem] tracking-[0.2em] text-[#f5f5f5]/40">
-            AI Planner
+        <div className="flex items-center gap-3">
+          <span className="font-display text-xl font-bold tracking-tight text-white">Coron</span>
+          <span className="hidden rounded-full bg-white/5 px-2.5 py-1 font-mono text-[10px] tracking-[0.2em] text-violet-300/80 md:inline-block">
+            AI
           </span>
         </div>
 
-        <div className="flex items-center justify-end gap-5 sm:gap-7">
-          <div className="hidden items-center gap-4 text-[#f5f5f5]/70 md:flex">
+        <div className="flex items-center gap-4 sm:gap-6">
+          <div className="hidden items-center gap-4 text-[#e8ebff]/50 md:flex">
             {social.map((s) => (
               <a
                 key={s.label}
                 href="#"
                 aria-label={s.label}
-                className="transition-opacity duration-200 hover:opacity-100"
+                className="transition-colors duration-200 hover:text-white"
               >
-                <svg viewBox="0 0 24 24" fill="currentColor" className="h-[0.9rem] w-[0.9rem]">
+                <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4">
                   <path d={s.path} />
                 </svg>
               </a>
@@ -56,12 +54,12 @@ export function Navbar() {
           </div>
           <a
             href="/signup"
-            className="bg-[#f5f5f5] px-[calc(1.1rem)] py-[0.7rem] font-courier text-[0.75rem] tracking-[0.1em] text-hermes shadow-[0_4px_14px_rgba(0,0,0,0.25)] transition-colors hover:bg-white"
+            className="rounded-full bg-gradient-to-r from-violet-500 via-indigo-500 to-cyan-400 px-5 py-2.5 font-display text-sm font-semibold tracking-wide text-white shadow-[0_0_24px_rgba(139,92,246,0.35)] transition-opacity hover:opacity-90"
           >
             Sign up
           </a>
         </div>
-      </div>
+      </nav>
     </header>
   );
 }

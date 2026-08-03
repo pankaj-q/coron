@@ -3,27 +3,30 @@ import { TerminalDemo } from "@/components/landing/TerminalDemo";
 
 export function Hero() {
   return (
-    <section className="relative min-h-[100svh] overflow-hidden px-[clamp(16px,7vw,120px)] pb-[clamp(48px,9vh,120px)] pt-[clamp(160px,24vw,340px)]">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:26px_26px]" />
-
-      <div className="relative grid items-end gap-14 lg:grid-cols-[1.25fr_1fr] lg:gap-8">
+    <section className="relative pt-40 pb-20 sm:pt-48">
+      <div className="mx-auto grid max-w-7xl items-center gap-14 px-4 sm:px-6 lg:grid-cols-[1.05fr_1fr] lg:gap-10">
         <div>
-          <p className="font-courier text-xs tracking-[0.18em] text-[#f5f5f5]/70 sm:text-sm">
-            Coron · Your goal, one AI plan · Free
-          </p>
-          <h1 className="mt-7 font-editorial text-[clamp(2.9rem,8.5vw,7.6rem)] font-light leading-[0.88] tracking-[0.03em] text-[#f5f5f5]">
-            <span className="block">Type a goal.</span>
-            <span className="block">Get the plan.</span>
-            <span className="block text-acid">Start doing.</span>
+          <span className="inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 font-mono text-[11px] tracking-[0.2em] text-violet-300/90">
+            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
+            Goal → Plan → Done
+          </span>
+          <h1 className="mt-7 font-display text-[clamp(2.6rem,6.5vw,5.5rem)] font-bold leading-[0.95] tracking-tight text-white">
+            Type a goal.
+            <br />
+            <span className="bg-gradient-to-r from-violet-400 via-indigo-300 to-cyan-300 bg-clip-text text-transparent">
+              Get the plan.
+            </span>
+            <br />
+            Start doing.
           </h1>
-          <p className="mt-8 max-w-xl font-courier text-sm leading-[1.7] tracking-[0.06em] text-[#f5f5f5]/80 sm:text-base">
+          <p className="mt-7 max-w-xl text-base leading-relaxed text-slate-300 sm:text-lg">
             Say what you want in plain words. Coron builds the plan — prioritized steps, realistic
             time, one clear next action. No blank pages, no templates, no guessing.
           </p>
-          <div className="mt-10 flex flex-col items-start gap-5">
+          <div className="mt-9 flex flex-col items-start gap-4 sm:flex-row">
             <Link
               href="/signup"
-              className="inline-flex items-center gap-3 bg-[#f5f5f5] px-[calc(1.4rem)] py-[1.05rem] font-courier text-sm tracking-[0.1em] text-hermes shadow-[0_4px_14px_rgba(0,0,0,0.25)] transition-colors hover:bg-white"
+              className="inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-violet-600 via-indigo-500 to-cyan-400 px-8 py-4 font-display text-sm font-semibold tracking-wide text-white shadow-[0_8px_32px_rgba(139,92,246,0.4)] transition-transform hover:-translate-y-0.5"
             >
               Create my first plan
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4">
@@ -32,14 +35,14 @@ export function Hero() {
             </Link>
             <a
               href="#features"
-              className="inline-flex items-center gap-3 border border-[#f5f5f5]/30 px-[calc(1.4rem)] py-[1.05rem] font-courier text-sm tracking-[0.1em] text-[#f5f5f5] transition-colors hover:bg-white/10"
+              className="inline-flex items-center gap-3 rounded-full glass px-8 py-4 font-display text-sm font-semibold tracking-wide text-slate-200 transition-colors hover:bg-white/10"
             >
               See how it works
-              <span className="text-acid">↓</span>
+              <span className="text-cyan-300">↓</span>
             </a>
           </div>
-          <p className="mt-8 font-courier text-[11px] tracking-[0.1em] text-[#f5f5f5]/40">
-            Free forever · No credit card · Your plans stay yours
+          <p className="mt-8 font-mono text-[11px] tracking-[0.16em] text-slate-500">
+            FREE FOREVER · NO CREDIT CARD · YOUR PLANS STAY YOURS
           </p>
         </div>
 

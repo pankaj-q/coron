@@ -25,17 +25,17 @@ const lines: Line[] = [
 function lineColor(type: Line["type"]) {
   switch (type) {
     case "cmd":
-      return "text-hermes font-bold";
+      return "text-white font-semibold";
     case "dim":
-      return "text-hermes/40";
+      return "text-slate-500";
     case "ok":
-      return "text-hermes font-bold";
+      return "text-emerald-400 font-semibold";
     case "high":
-      return "text-hermes/85 font-bold";
+      return "text-violet-300 font-semibold";
     case "med":
-      return "text-hermes/75";
+      return "text-cyan-300";
     case "low":
-      return "text-hermes/60";
+      return "text-slate-400";
   }
 }
 
@@ -74,39 +74,41 @@ export function TerminalDemo() {
   const cursorBlink = lineIdx >= lines.length;
 
   return (
-    <div className="w-full border border-[#0000f2]/15 bg-white">
-      <div className="flex items-center gap-2 border-b border-[#0000f2]/10 px-5 py-3">
-        <span className="h-3 w-3 rounded-full border border-[#0000f2]/25" />
-        <span className="h-3 w-3 rounded-full border border-[#0000f2]/25" />
-        <span className="h-3 w-3 rounded-full border border-[#0000f2]/25" />
-        <span className="ml-3 font-courier text-xs tracking-[0.1em] text-[#0000f2]/50">
-          coron — zsh
-        </span>
-        <span className="ml-auto bg-acid px-2 py-0.5 font-courier text-[10px] tracking-[0.14em] text-hermes">
-          live demo
-        </span>
-      </div>
+    <div className="relative w-full">
+      <div className="absolute -inset-px rounded-3xl bg-gradient-to-br from-violet-500/40 via-indigo-500/30 to-cyan-400/40 blur-lg" />
+      <div className="relative overflow-hidden rounded-3xl glass-strong glow-border">
+        <div className="flex items-center gap-2 border-b border-white/5 px-5 py-3.5">
+          <span className="h-3 w-3 rounded-full bg-red-400/70" />
+          <span className="h-3 w-3 rounded-full bg-amber-400/70" />
+          <span className="h-3 w-3 rounded-full bg-emerald-400/70" />
+          <span className="ml-3 font-mono text-xs tracking-[0.1em] text-slate-400">coron — zsh</span>
+          <span className="ml-auto rounded-full bg-gradient-to-r from-violet-500 to-cyan-400 px-2.5 py-0.5 font-mono text-[10px] tracking-[0.14em] text-white">
+            live demo
+          </span>
+        </div>
 
-      <div className="min-h-[15rem] space-y-1.5 p-6 font-courier text-[13px] leading-relaxed sm:text-sm">
-        {lines.slice(0, lineIdx + 1).map((line, i) =>
-          i === lineIdx ? (
-            <p key={i} className={lineColor(line.type)}>
-              {line.text.slice(0, charIdx)}
-              {!cursorBlink && (
-                <span className="ml-0.5 inline-block h-3.5 w-2 translate-y-0.5 animate-pulse bg-hermes" />
-              )}
+        <div className="min-h-[16rem] space-y-1.5 p-6 font-mono text-[13px] leading-relaxed sm:text-sm">
+          {lines.slice(0, lineIdx + 1).map((line, i) =>
+            i === lineIdx ? (
+              <p key={i} className={lineColor(line.type)}>
+                {line.text.slice(0, charIdx)}
+                {!cursorBlink && (
+                  <span className="ml-0.5 inline-block h-3.5 w-2 translate-y-0.5 animate-pulse bg-cyan-300" />
+                )}
+              </p>
+            ) : (
+              <p key={i} className={lineColor(line.type)}>
+                {line.text}
+              </p>
+            ),
+          )}
+          {cursorBlink && (
+            <p className="text-white font-semibold">
+              ${" "}
+              <span className="ml-0.5 inline-block h-3.5 w-2 translate-y-0.5 animate-pulse bg-cyan-300" />
             </p>
-          ) : (
-            <p key={i} className={lineColor(line.type)}>
-              {line.text}
-            </p>
-          ),
-        )}
-        {cursorBlink && (
-          <p className="text-hermes font-bold">
-            $ <span className="ml-0.5 inline-block h-3.5 w-2 translate-y-0.5 animate-pulse bg-hermes" />
-          </p>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );
