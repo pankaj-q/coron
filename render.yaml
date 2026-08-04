@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: coron
+    runtime: node
+    repo: https://github.com/pankaj-q/coron
+    branch: main
+    buildCommand: npm install && npm run build
+    startCommand: npx prisma migrate deploy && npm start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        value: file:/var/data/dev.db
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        sync: false
+      - key: AUTH_SECRET
+        sync: false
+      - key: RESEND_API_KEY
+        sync: false
+      - key: RESEND_FROM_EMAIL
+        sync: false
+    disk:
+      name: coron-data
+      mountPath: /var/data
+      sizeGB: 1
